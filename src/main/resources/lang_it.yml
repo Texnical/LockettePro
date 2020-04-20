@@ -1,5 +1,5 @@
 # Lingua Italiana creata da Maxetto.
-command-usage: "&6[LockettePro] &bAiuto LockettePro\n&c1. Per aggiungere un giocatore nel cartello, fai tasto destro sul cartello, poi scrivi /lock <numero linea> <testo> per modificare la linea indicata.\n&c2. Per ricaricare la configurazione, scrivi /lock reload.\nLockettePro di connection_lost"
+command-usage: "&6[LockettePro] &bAiuto LockettePro\\n&c1. Per aggiungere un giocatore nel cartello, fai tasto destro sul cartello, poi scrivi /lock <numero linea> <testo> per modificare la linea indicata.\\n&c2. Per ricaricare la configurazione, scrivi /lock reload.\\nockettePro di connection_lost"
 you-can-quick-lock-it: '&6[LockettePro] &aFai tasto destro sul blocco con un cartello per privatizzarlo.'
 you-can-manual-lock-it: '&6[LockettePro] &aPiazza un cartello e scrivi [Private] per privatizzarlo.'
 config-reloaded: '&6[LockettePro] &aConfigurazione ricaricata correttamente.'

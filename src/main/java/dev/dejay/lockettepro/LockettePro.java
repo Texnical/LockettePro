@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,7 +27,6 @@ public class LockettePro extends JavaPlugin {
             setEnabled(false);
             getLogger().warning("This plugin is not compatible with your server version!");
         }
-        getLogger().warning("===================================");
         if (!isEnabled()) {
             return;
         }
@@ -36,7 +35,9 @@ public class LockettePro extends JavaPlugin {
         new Config(this);
         // Register Listeners
         // If debug mode is not on, debug listener won't register
-        if (debug) getServer().getPluginManager().registerEvents(new BlockDebugListener(), this);
+        if (debug) {
+            getServer().getPluginManager().registerEvents(new BlockDebugListener(), this);
+        }
         getServer().getPluginManager().registerEvents(new BlockPlayerListener(), this);
         getServer().getPluginManager().registerEvents(new BlockEnvironmentListener(), this);
         getServer().getPluginManager().registerEvents(new BlockInventoryMoveListener(), this);
@@ -48,7 +49,7 @@ public class LockettePro extends JavaPlugin {
                 DependencyProtocolLib.setUpProtocolLib(this);
             } else {
                 plugin.getLogger().info("ProtocolLib is not found!");
-                plugin.getLogger().info("UUID & expiracy support requires ProtocolLib, or else signs will be ugly!");
+                plugin.getLogger().info("UUID & Expiry support requires ProtocolLib, or else signs will be ugly!");
             }
         }
     }
@@ -174,7 +175,7 @@ public class LockettePro extends JavaPlugin {
                 case "4":
                     if (player.hasPermission("lockettepro.edit")){
                         String message = "";
-                        Block block = Utils.getSelectedSign(player);
+                        Block block = Utils.getCurrentSign(player);
                         if (block == null){
                             Utils.sendMessages(player, Config.getLang("no-sign-selected"));
                         } else if (!LocketteProAPI.isSign(block) || !(player.hasPermission("lockettepro.edit.admin") || LocketteProAPI.isOwnerOfSign(block, player))){
@@ -205,7 +206,7 @@ public class LockettePro extends JavaPlugin {
                                     Utils.setSignLine(block, Integer.parseInt(args[0])-1, message);
                                     Utils.sendMessages(player, Config.getLang("sign-changed"));
                                     if (Config.isUuidEnabled()){
-                                        Utils.updateUuidByUsername(Utils.getSelectedSign(player), Integer.parseInt(args[0])-1);
+                                        Utils.updateUuidByUsername(Utils.getCurrentSign(player), Integer.parseInt(args[0])-1);
                                     }
                                     break;
                                 }
@@ -222,7 +223,7 @@ public class LockettePro extends JavaPlugin {
                                     Utils.setSignLine(block, Integer.parseInt(args[0])-1, message);
                                     Utils.sendMessages(player, Config.getLang("sign-changed"));
                                     if (Config.isUuidEnabled()){
-                                        Utils.updateUuidByUsername(Utils.getSelectedSign(player), Integer.parseInt(args[0])-1);
+                                        Utils.updateUuidByUsername(Utils.getCurrentSign(player), Integer.parseInt(args[0])-1);
                                     }
                                     break;
                                 }
@@ -236,17 +237,17 @@ public class LockettePro extends JavaPlugin {
                     break;
                 case "force":
                     if (debug && player.hasPermission("lockettepro.debug")){
-                        Utils.setSignLine(Utils.getSelectedSign(player), Integer.parseInt(args[1]), args[2]);
+                        Utils.setSignLine(Utils.getCurrentSign(player), Integer.parseInt(args[1]), args[2]);
                         break;
                     }
                 case "update":
                     if (debug && player.hasPermission("lockettepro.debug")){
-                        Utils.updateSign(Utils.getSelectedSign(player));
+                        Utils.updateSign(Utils.getCurrentSign(player));
                         break;
                     }
                 case "uuid":
                     if (debug && player.hasPermission("lockettepro.debug")){
-                        Utils.updateUuidOnSign(Utils.getSelectedSign(player));
+                        Utils.updateUuidOnSign(Utils.getCurrentSign(player));
                         break;
                     }
                 default:

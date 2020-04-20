@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Tag;
@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class BlockDebugListener implements Listener {
     
-    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDebugClick(PlayerInteractEvent event){
         Player p = event.getPlayer();
@@ -34,10 +33,10 @@ public class BlockDebugListener implements Listener {
                 p.sendMessage(" - now     : " + (int)(System.currentTimeMillis()/1000));
             }
             
-            p.sendMessage("Block: " + b.getType().toString() + " " + b.getData());
+            p.sendMessage("Block: " + b.getType().toString());
             
             if (Tag.WALL_SIGNS.isTagged(b.getType())){
-                for (String line : ((Sign)b.getState()).getLines()){
+                for (String line : ((Sign) b.getState()).getLines()){
                     p.sendMessage(ChatColor.GREEN + line);
                 }
             }

@@ -1,6 +1,6 @@
 # German translation by HeartCore
 
-command-usage: "&6[LockettePro] &bLockettePro Plugin-Hilfe\n&c1. Um einen User einem Schild hinzuzufügen, rechtsklicke das Schild und gib anschließend /lock <Zeilennummer> <Text> ein, um den Text zu ändern\n&c2. Um die Konfiguration neu zu laden, gib /lock reload ein.\nLockettePro von connection_lost"
+command-usage: "&6[LockettePro] &bLockettePro Plugin-Hilfe\\n&c1. Um einen User einem Schild hinzuzufügen, rechtsklicke das Schild und gib anschließend /lock <Zeilennummer> <Text> ein, um den Text zu ändern\\n&c2. Um die Konfiguration neu zu laden, gib /lock reload ein.\\nLockettePro von connection_lost"
 you-can-quick-lock-it: '&6[LockettePro] &aRechtsklicke den Block mit einem Schild, um ihn zu sichern.'
 you-can-manual-lock-it: '&6[LockettePro] &aPlatziere ein Schild und schreibe [Private] darauf, um es zu sichern.'
 config-reloaded: '&6[LockettePro] &aKonfiguratio neu geladen..'

@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.google.common.cache.CacheBuilder;
@@ -6,6 +6,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.regex.Pattern;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -30,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
-    public static final String usernamepattern = "^[a-zA-Z0-9_]*$";
-    private static LoadingCache<UUID, Block> selectedsign = CacheBuilder.newBuilder()
+    public static final Pattern username = Pattern.compile("^[a-zA-Z0-9_]*$");
+    private static LoadingCache<UUID, Block> currentSign = CacheBuilder.newBuilder()
             .expireAfterAccess(30, TimeUnit.SECONDS)
             .build(new CacheLoader<UUID, Block>() {
                 public Block load(UUID key) {
@@ -81,35 +82,39 @@ public class Utils {
     }
     
     public static void updateSign(Block block){
-        ((Sign)block.getState()).update();
+        (block.getState()).update();
     }
 
-    public static Block getSelectedSign(Player player) {
-        Block b = selectedsign.getIfPresent(player.getUniqueId());
+    public static Block getCurrentSign(Player player) {
+        Block b = currentSign.getIfPresent(player.getUniqueId());
         if (b != null && !player.getWorld().getName().equals(b.getWorld().getName())) {
-            selectedsign.invalidate(player.getUniqueId());
+            currentSign.invalidate(player.getUniqueId());
             return null;
         }
         return b;
     }
     
     public static void selectSign(Player player, Block block){
-        selectedsign.put(player.getUniqueId(), block);
+        currentSign.put(player.getUniqueId(), block);
     }
     
-    public static void playLockEffect(Player player, Block block){
-//		player.playSound(block.getLocation(), Sound.DOOR_CLOSE, 0.3F, 1.4F);
-//		player.spigot().playEffect(block.getLocation().add(0.5, 0.5, 0.5), Effect.CRIT, 0, 0, 0.3F, 0.3F, 0.3F, 0.1F, 64, 64);
+    public static void playLockEffect(Player player, Block block) {
+        Location location = block.getLocation().add(0.5, 0.5, 0.5);
+		player.playSound(block.getLocation(), Sound.BLOCK_WOODEN_DOOR_CLOSE, 0.3F, 1.4F);
+		player.spawnParticle(Particle.CRIT,
+            location.getX(), location.getY(), location.getZ(), 3, 0.3F, 0.3F, 0.1F, 64, 64);
     }
     
     public static void playAccessDenyEffect(Player player, Block block){
-//		player.playSound(block.getLocation(), Sound.VILLAGER_NO, 0.3F, 0.9F);
-//		player.spigot().playEffect(block.getLocation().add(0.5, 0.5, 0.5), Effect.FLAME, 0, 0, 0.3F, 0.3F, 0.3F, 0.01F, 64, 64);
+        Location location = block.getLocation().add(0.5, 0.5, 0.5);
+        player.playSound(block.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.3F, 0.9F);
+		player.spawnParticle(Particle.FLAME,
+            location.getX(), location.getY(), location.getZ(), 3, 0.3F, 0.3F, 0.1F, 64, 64);
     }
     
     public static void sendMessages(CommandSender sender, String messages){
         if (messages == null || messages.equals("")) return;
-        sender.sendMessage(messages);
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', messages));
     }
 
     public static boolean shouldNotify(Player player){
@@ -122,9 +127,9 @@ public class Utils {
     }
     
     public static boolean hasValidCache(Block block){
-        List<MetadataValue> metadatas = block.getMetadata("expires");
-        if (!metadatas.isEmpty()){
-            long expires = metadatas.get(0).asLong();
+        List<MetadataValue> metadata = block.getMetadata("expires");
+        if (!metadata.isEmpty()){
+            long expires = metadata.get(0).asLong();
             if (expires > System.currentTimeMillis()){
                 return true;
             }
@@ -133,8 +138,8 @@ public class Utils {
     }
     
     public static boolean getAccess(Block block){ // Requires hasValidCache()
-        List<MetadataValue> metadatas = block.getMetadata("locked");
-        return metadatas.get(0).asBoolean();
+        List<MetadataValue> metadata = block.getMetadata("locked");
+        return metadata.get(0).asBoolean();
     }
     
     public static void setCache(Block block, boolean access){
@@ -220,7 +225,7 @@ public class Utils {
     }
     
     public static boolean isUserName(String text){
-        if (text.length() < 17 && text.length() > 2 && text.matches(usernamepattern)){
+        if (text.length() < 17 && text.length() > 2 && text.matches(username.pattern())){
             return true;
         } else {
             return false;

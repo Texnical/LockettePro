@@ -1,4 +1,4 @@
-command-usage: "&6[LockettePro] &bLockettePro plugin help\n&c1. In order to add a user to a sign, right click the sign, then enter /lock <line number> <text> to change the line.\n&c2. To reload configuration, enter /lock reload.\nLockettePro by connection_lost"
+command-usage: "&6[LockettePro] &bLockettePro: \\n&c1. In order to add a user to a sign, right click the sign, then enter /lock <line number> <text> to change the line.\\n&c2. To reload configuration, enter /lock reload.\\nLockettePro by connection_lost"
 you-can-quick-lock-it: '&6[LockettePro] &aRight click the block with a sign to lock.'
 you-can-manual-lock-it: '&6[LockettePro] &aPlace a sign and write [Private] to lock it.'
 config-reloaded: '&6[LockettePro] &aConfig reloaded.'

@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

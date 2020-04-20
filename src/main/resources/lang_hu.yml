@@ -1,5 +1,5 @@
 # Hungarian translation by andris155
-command-usage: "&6[LockettePro] &bLockettePro plugin segítség\n&c1. Ha szeretnél valakit hozzáadni a védéshez, akkor jobb klikkelj a táblára és írd be /lock <sorszám> <név>, hogy megváltoztasd a sort.\n&c2. Ha újra szeretnéd tölteni a plugin-t, akkor írd be /lock reload.\nLockettePro by connection_lost"
+command-usage: "&6[LockettePro] &bLockettePro plugin segítség\\n&c1. Ha szeretnél valakit hozzáadni a védéshez, akkor jobb klikkelj a táblára és írd be /lock <sorszám> <név>, hogy megváltoztasd a sort.\\n&c2. Ha újra szeretnéd tölteni a plugin-t, akkor írd be /lock reload.\\nockettePro by connection_lost"
 you-can-quick-lock-it: '&6[LockettePro] &aJobb klikkelj a blokkra egy táblával a levédéséhez.'
 you-can-manual-lock-it: '&6[LockettePro] &aKérlek helyezz le egy táblát és írd rá, hogy [Lock] a levédéshez.'
 config-reloaded: '&6[LockettePro] &aA konfig újratöltve.'

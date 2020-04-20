@@ -1,5 +1,5 @@
 # Chinese (simplified) translation by connection_lost
-command-usage: "&6[LockettePro] &bLockettePro 插件说明\n&c1. 为箱子添加或删除用户，首先右键选中一个牌子， 然后输入/lock 行号 玩家名 即可。\n&c2. 管理员重载插件配置，使用 /lock reload\nLockettePro by connection_lost"
+command-usage: "&6[LockettePro] &bLockettePro 插件说明\\n&c1. 为箱子添加或删除用户，首先右键选中一个牌子， 然后输入/lock 行号 玩家名 即可。\\n&c2. 管理员重载插件配置，使用 /lock reload\\nockettePro by connection_lost"
 you-can-quick-lock-it: '&6[LockettePro] 手持牌子右键箱子即可上锁。'
 you-can-manual-lock-it: '&6[LockettePro] 贴上一个牌子并写上[Private]即可上锁。'
 config-reloaded: '&6[LockettePro] &a配置已重新加载。'

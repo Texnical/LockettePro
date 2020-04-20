@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.bukkit.util.FileUtil;
 
 public class Config {
 
@@ -195,7 +196,8 @@ public class Config {
     }
     
     public static void initAdditionalFiles(){
-        String[] availablefiles = {"lang.yml", "lang_zh-cn.yml", "lang_es.yml", "lang_it.yml"};
+        String[] availablefiles = {"lang.yml", "lang_de.yml", "lang_es.yml",
+            "lang_hu.yml", "lang_it.yml", "lang_zh-cn.yml"};
         for (String filename : availablefiles){
             File langfile = new File(plugin.getDataFolder(), filename);
             if (!langfile.exists()){

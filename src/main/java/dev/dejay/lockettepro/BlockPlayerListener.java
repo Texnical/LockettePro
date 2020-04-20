@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

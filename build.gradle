@@ -1,7 +1,6 @@
 apply plugin: 'java-library'
-apply plugin: 'maven-publish'
 
-// Suppiled by Jenkins
+// Supplied by Jenkins
 ext.buildNumber = System.env.BUILD_NUMBER == null ? "x"                : "$System.env.BUILD_NUMBER"
 ext.mavenDirectory = System.env.MAVEN_DIR == null ? "$projectDir/repo" : "$System.env.MAVEN_DIR"
 ext.jdDirectory = System.env.JAVADOCS_DIR == null ? null               : "$System.env.JAVADOCS_DIR"
@@ -9,34 +8,31 @@ ext.jdDirectory = System.env.JAVADOCS_DIR == null ? null               : "$Syste
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-// differet version convension from Nyaa plugins
-group = "me.crafter.mc"
+// Use my own package name and version scheming.
+group = "dev.dejay.lockettepro"
 archivesBaseName = "LockettePro"
-version = "2.9.${buildNumber}-1.15.1"
+version = "3.0-${buildNumber}"
 
 repositories {
     jcenter()
     maven {name 'Spigot';     url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'}
     maven {name 'Sonatype';   url 'https://oss.sonatype.org/content/groups/public'}
-    maven {name 'sk89q';      url 'http://maven.sk89q.com/artifactory/repo/'}
+    maven {name 'sk89q';      url 'https://maven.sk89q.com/artifactory/repo/'}
     maven {name 'playpro';    url 'https://maven.playpro.com/'}
     maven {name 'vault-repo'; url 'https://jitpack.io'}
-    maven {name 'dmulloy2';   url 'http://repo.dmulloy2.net/content/groups/public/'}
+    maven {name 'dmulloy2';   url 'https://repo.dmulloy2.net/content/groups/public/'}
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.15.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
     compileOnly('net.milkbowl.vault:VaultAPI:1.7') { transitive = false }
     compileOnly('com.sk89q.worldguard:worldguard-bukkit:7.0.2-SNAPSHOT') { transitive = false }
-    // FIXME: ProtocolLib-API is not available for 4.5.0
-    //compileOnly('com.comphenix.protocol:ProtocolLib-API:4.4.0') { transitive = false }
     compileOnly('com.comphenix.protocol:ProtocolLib:4.5.0') { transitive = false }
-    // Note: the repo maven.playpro.com is not updated to match the version on spigotmc
-    compileOnly('net.coreprotect:coreprotect:2.16.3') { transitive = false }
+    compileOnly('net.coreprotect:coreprotect:2.18.2') { transitive = false }
 }
-compileJava {
-    options.compilerArgs += ["-Xlint:deprecation"]
-}
+
+compileJava {}
+
 processResources {
     expand version: project.version
 }
@@ -46,18 +42,4 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.java.srcDirs
 }
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact sourcesJar
-            artifactId "lockettepro"
-            version "2.9-SNAPSHOT"
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "$mavenDirectory"
-        }
-    }
-}
+

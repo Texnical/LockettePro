@@ -1,6 +1,6 @@
 name: LockettePro
-main: me.crafter.mc.lockettepro.LockettePro
-author: connection_lost
+main: dev.dejay.lockettepro.LockettePro
+authors: [DeJayDev, connection_lost]
 softdepend: [Vault, WorldGuard, ProtocolLib, CoreProtect]
 loadbefore: [SignShop]
 version: ${version}

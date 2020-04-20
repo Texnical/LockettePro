@@ -1,4 +1,4 @@
-package me.crafter.mc.lockettepro;
+package dev.dejay.lockettepro;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.coreprotect.CoreProtect;
