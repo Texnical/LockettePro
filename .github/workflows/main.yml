@@ -23,18 +23,23 @@ jobs:
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
       - name: Build with Gradle
-        run: gradle build
+        run: gradle jar
+
+      - name: Generate SHA
+        id: make_sha
+        uses: benjlevesque/short-sha@v1.0
 
       - name: Create a Release
         id: make_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ steps.make_sha.outputs.sha }}
         with:
           # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ env.SHA }}
           # The name of the release. For example, `Release v1.0.1`
-          release_name: Release ${{ github.ref }}
+          release_name: Release ${{ env.SHA }}
           # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
           draft: true # optional
 
@@ -43,8 +48,9 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ env.sha }}
         with:
-          upload_url: ${{ steps.make_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./build/libs/LockettePro-*.jar
-          asset_name: LockettePro-${{ github.ref }}.jar
+          upload_url: ${{ steps.make_release.outputs.upload_url }}
+          asset_path: ./build/libs/LockettePro-3.0.jar
+          asset_name: LockettePro-${{ env.SHA }}.jar
           asset_content_type: application/jar
