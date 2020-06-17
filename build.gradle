@@ -26,6 +26,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
     compileOnly('net.milkbowl.vault:VaultAPI:1.7') { transitive = false }
+    compileOnly('com.github.TechFortress:griefprevention:16.13.0') { transitive = false }
     compileOnly('com.sk89q.worldguard:worldguard-bukkit:7.0.2-SNAPSHOT') { transitive = false }
     compileOnly('com.comphenix.protocol:ProtocolLib:4.5.0') { transitive = false }
     compileOnly('net.coreprotect:coreprotect:2.18.2') { transitive = false }
