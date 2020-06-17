@@ -40,6 +40,7 @@ public class Config {
     private static double lockexpiredays = 60D;
     public static boolean protocollib = false;
     public static boolean worldguard = false;
+    public static boolean griefprevention = false;
     public static boolean coreprotect = false;
     private static long lockdefaultcreatetime = -1L;
     private static String lockexpirestring = "";
@@ -57,6 +58,7 @@ public class Config {
         uuid = config.getBoolean("enable-uuid-support", false);
         protocollib = config.getBoolean("protocollib", true);
         worldguard = config.getBoolean("worldguard", true);
+        griefprevention = config.getBoolean("griefprevention", true);
         coreprotect = config.getBoolean("coreprotect", true);
         langfilename = config.getString("language-file-name", "lang.yml");
         lang = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), langfilename));

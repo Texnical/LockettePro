@@ -1,7 +1,7 @@
 name: LockettePro
 main: dev.dejay.lockettepro.LockettePro
-authors: [DeJayDev, connection_lost]
-softdepend: [Vault, WorldGuard, ProtocolLib, CoreProtect]
+authors: [Texnical, DeJayDev, connection_lost]
+softdepend: [Vault, WorldGuard, ProtocolLib, CoreProtect, GriefPrevention]
 loadbefore: [SignShop]
 version: ${version}
 api-version: '1.13'

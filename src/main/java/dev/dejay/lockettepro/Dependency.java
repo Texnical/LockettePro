@@ -20,7 +20,7 @@ public class Dependency {
     protected static Plugin vault = null;
     protected static Permission permission = null;
     private static CoreProtectAPI coreProtectAPI;
-	protected static Plugin griefprevention = null;
+	protected static GriefPrevention griefprevention = null;
 
     public Dependency(Plugin plugin) {
         // WorldGuard
@@ -36,8 +36,10 @@ public class Dependency {
             RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
             permission = rsp.getProvider();
         }
-	    // GriefPrevention
-	    griefprevention = plugin.getServer().getPluginManager().getPlugin("GriefPrevention");
+        // GriefPrevention
+        if (Config.griefprevention && plugin.getServer().getPluginManager().getPlugin("GriefPrevention") != null) {
+            griefprevention = GriefPrevention.instance;
+        }
 
         if (Config.coreprotect && Bukkit.getPluginManager().getPlugin("CoreProtect") != null && CoreProtect.getInstance().getAPI().APIVersion() == 6) {
             coreProtectAPI = CoreProtect.getInstance().getAPI();
@@ -54,12 +56,12 @@ public class Dependency {
                 return true;
             }
         }
-		if (griefprevention != null){
-			Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);
-			if (claim != null){
-				if (claim.allowBuild(player, block.getType()) != null) return true;
-			}
-		}
+        if (griefprevention != null) {
+            Claim claim = griefprevention.dataStore.getClaimAt(block.getLocation(), false, null);
+            if (claim != null) {
+                return claim.allowBuild(player, block.getType()) != null;
+            }
+        }
         return false;
     }
         

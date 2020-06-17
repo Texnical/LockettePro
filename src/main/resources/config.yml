@@ -7,6 +7,7 @@ enable-quick-protect: true
 enable-uuid-support: false
 protocollib: true
 worldguard: true
+griefprevention: true
 coreprotect: true
 block-interfere-placement: true
 block-item-transfer-in: false
